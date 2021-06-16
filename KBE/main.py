@@ -1,16 +1,20 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
+# This will be the main document of the KBE app to design the wing of an electrical aircraft
+# By Martin van Schie and Yara Hinssen
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+
+
+
+
+
+
+
+
+
+
+#The parapy bit
+from parapy.geom import Box
+from parapy.gui import display
+obj = Box(1, 2, 3)
+display(obj)
