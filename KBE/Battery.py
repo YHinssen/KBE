@@ -12,7 +12,7 @@ THIS_DIR = os.path.dirname(__file__)
 ROOT = Tk()
 ROOT.withdraw()
 
-class battery(Base):
+class battery(Geombase):
     @Part
     def Battery(self):
         @Attribute
