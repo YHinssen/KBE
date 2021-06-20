@@ -1,0 +1,5 @@
+airfoil coordinates zoals op airfoiltool.com, in een txt file
+ik doe EMWET en Q3D stuff want dat ken ik al
+
+
+misschien maar niet exacte thiccness sjeit
