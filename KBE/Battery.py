@@ -41,7 +41,7 @@ class Battery(GeomBase):
     input_bat_width = Input(20)
     input_bat_height = Input(5)
     input_bat_depth = Input(10)
-    Wirethickness = Input(0.5)
+    Wireradius = Input(0.5)
 
     @Attribute
     def Batterywidth(self):
@@ -68,19 +68,44 @@ class Battery(GeomBase):
         num_bat = (self.width_wingbox * self.height_wingbox * self.depth_wingbox) / self.Batteryvolume
         return num_bat
 
+    @Attribute
+    def num_bat_x(self):
+        num_batx = round((self.width_wingbox/self.Batterywidth))
+        return num_batx
+
+    @Attribute
+    def num_bat_y(self):
+        num_baty = round(self.depth_wingbox/(self.Batterydepth + 3*self.Wireradius))
+        return num_baty
+
+    @Attribute
+    def num_bat_z(self):
+        num_batz = round((self.height_wingbox/self.Batteryheight))
+        return num_batz
+
+    @Attribute
+    def coordinates(self):
+        coordinates = []
+        for i in range(self.num_bat_x):
+            for j in range(self.num_bat_y):
+                for k in range(self.num_bat_z):
+                    coordinates.append((i*self.Batterywidth,j*(self.Batterydepth+6*self.Wireradius),k*self.Batteryheight))
+        return coordinates
+
     @Part
-    def batteryone(self):
-        return Box(quantify=round(self.width_wingbox / self.Batterywidth),
-                   width=self.Batterywidth,
-                   length=self.Batterydepth,
-                   height=self.Batteryheight,
-                   position=translate(Position(Point(0, 0, 0)), 'x', child.index * self.Batterywidth),
-                   color='blue',
-                   )
+    def batteryx(self):
+            return Box(quantify=round(self.max_num_batteries),
+                       width=self.Batterywidth,
+                       length=self.Batterydepth,
+                       height=self.Batteryheight,
+                       position=Position(Point(self.coordinates[child.index])),
+                       color='blue',
+                       )
+
 
     @Part
     def batterytwo(self):
-        return Box(quantify=round(self.height_wingbox / self.Batteryheight),
+        return Box(quantify=self.num_bat_z,
                    width=self.Batterywidth,
                    length=self.Batterydepth,
                    height=self.Batteryheight,
@@ -89,30 +114,21 @@ class Battery(GeomBase):
                    )
 
     @Part
-    def battery22(self):
-        return Box(quantify=round(self.height_wingbox / self.Batteryheight - 1),
-                   width=self.Batterywidth,
-                   length=self.Batterydepth,
-                   height=self.Batteryheight,
-                   position=translate(Position(Point(0, (self.Batterydepth + self.Wirethickness), self.Batteryheight)), 'z', child.index * self.Batteryheight),
-                   color='blue',
-                   )
-
-    @Part
     def batterythree(self):
-        return Box(quantify=round(self.depth_wingbox / (self.Batterydepth+self.Wirethickness)),
+        return Box(quantify=len(self.coordinates),
                    width=self.Batterywidth,
                    length=self.Batterydepth,
                    height=self.Batteryheight,
-                   position=translate(Position(Point(0, 0, 0)), 'y', child.index * (self.Batterydepth + self.Wirethickness)),
+                   position=Position(Point(self.coordinates[child.index])),
                    color='blue',
                    )
 
     @Part
     def HighVoltWire(self):
-        return Cylinder(radius=1,
-                        height=400,
-                        position=Position(Point(0, 15, 0)))
+        return Cylinder(radius=self.Wireradius,
+                        quantify = self.num_bat_y-1,
+                        height=self.width_wingbox,
+                        position=translate(rotate(Position(Point(0, (self.Batterydepth + 3* self.Wireradius), 0.5*self.Batteryheight)),'y', 1.6), 'y', child.index * (self.Batterydepth +1.5*self.Wireradius )),)
 
 from parapy.gui import display
 
