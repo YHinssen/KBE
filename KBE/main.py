@@ -12,7 +12,15 @@ from parapy.core.base import Base
 from parapy.exchange import STEPReader
 from parapy.geom import Position, Point
 
+import math as m
+import numpy as np
+from parapy.core import *
+from parapy.geom import *
+from Airfoilcoordiantesgenerator import *
+from Airfoilinterpolater import *
+
 from Battery import *
+from Structure import *
 
 THIS_DIR = os.path.dirname(__file__)
 
@@ -24,6 +32,8 @@ total_depth_userinput = 50
 
 
 class Main(Base):
+    #####take in the input file
+    lalala = Input(np.loadtxt('inputexample.txt', dtype='str', delimiter=';'))
 
     @Attribute
     def total_width(self):
@@ -83,6 +93,16 @@ class Main(Base):
                        depth_wingbox=self.total_depth,
                        color='blue'
                        )
+
+    @Part
+    def habox(self):
+        return Wingbox(lala=self.lalala)
+
+    @Part
+    def hobox(self):
+        return Line(reference=Point(0, 0, 0),
+                    direction=Vector(1, 0, 0))
+
 
     # @Part
     # def Placement(self):
@@ -163,5 +183,12 @@ class Main(Base):
 #The parapy bit
 from parapy.geom import Box
 from parapy.gui import display
-obj = Main
+obj = Main(label="staircase")
 display(obj)
+
+# if __name__ == '__main__':
+#     from parapy.gui import display
+#
+#     obj1 = Main(label="staircase")
+#
+#     display(obj1)

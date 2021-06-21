@@ -1,0 +1,29 @@
+VALUE ; PARAMETER(UNIT)[comment] ; h
+fokker50test ; aircraft name (-) ; 1
+14 ; half span(m) ; 2
+3.5 ; root chord(m) ; 3
+0.25 ; taper ratio(-) ; 4
+5 ; quarter chord sweep angle(degrees) ; 5
+0 ; dihedral(degrees) ; 6
+25 ; front spar(%of chord) ; 7
+60 ; rear spar(%of chord) ; 8
+10 ; inner battery limit (%of half span) ; 9
+70 ; outer battery limit (%of half span) ; 10
+0.5 ; rib pitch(m)[it is suggested to make this equal to (a multiple of) the battery length/width (help) + 2 cm to allow for maximum space usage efficiency] ; 11
+0 ; maximum power (W) ; 12
+20820 ; estimated MTOW (kg) ; 13
+2.5 ; maximum load factor (-) ; 14
+0 ; battery length(m) ; 15
+0 ; battery width(m) ; 16
+0 ; batter height(m) ; 17
+0 ; battery energy density (or we do just take a default value) ; 18
+3 ; number of airfoils (-)[minimum of 2, root and tip airfoil(could be the same file though)] ; 19
+NACA2418b ; root airfoil name NACA2414(-) ; 20
+NACA2418b ; tip airfoil name (-) ; 21
+NACA2418b ; additional airfoil nr1 name (-)[lets just keep it constant at 3 airfoils] ; 22
+50 ; additional airfoil nr1 location (%of half span) ; 23
+1 ; number of engines per wing (-)[minimum of 1] ; 24
+150 ; cruise speed (m/s) ; 25
+5000 ; cruise altitude (m) [stay below 11000 m] ; 26
+2 ; fuselage diameter (m) ; 27
+25 ; spanwise location engine nr1 (%of half span)[copy this row if more engines are chosen] ; 28
